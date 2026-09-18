@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p><strong>Summary:</strong> {{ book.summary }}</p>
+
+    <h2>Author Information</h2>
+    <p><strong>Name:</strong> {{ book.author.name }} ({{ book.author.email }})</p>
+    {% if book.author.profile %}
+        <p><strong>Biography:</strong> {{ book.author.profile.biography }}</p>
+        <p><strong>Website:</strong> <a href="{{ book.author.profile.website }}">{{ book.author.profile.website }}</a></p>
+    {% endif %}
+
+    <h2>Categories</h2>
+    <ul>
+        {% for category in book.categories.all %}
+            <li>{{ category.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Publishers & Editions</h2>
+    <ul>
+        {% for pub in book.publication_set.all %}
+            <li>
+                <strong>Publisher:</strong> {{ pub.publisher.name }} | 
+                <strong>Date:</strong> {{ pub.publication_date }} | 
+                <strong>Edition:</strong> {{ pub.edition }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
